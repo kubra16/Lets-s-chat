@@ -3,9 +3,11 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const chats = require("./data/data");
 const connectDB = require("./config/db");
+const userRoutes = require("./routes/userRoutes");
 
 dotenv.config();
 const app = express();
+app.use(express.json());
 connectDB();
 
 const base_url = process.env.BASE_URL;
