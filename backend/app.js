@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const chats = require("./data/data");
 const connectDB = require("./config/db");
 const userRoutes = require("./routes/userRoutes");
+const { notFound, errorHandler } = require("./middlewares/errorMiddlewares");
 
 dotenv.config();
 const app = express();
@@ -20,10 +21,8 @@ app.get("/", (req, res) => {
 
 app.use("/api/user", userRoutes);
 
-// mongoose
-//   .connect(base_url, { useNewUrlParser: true, useUnifiedTopology: true })
-//   .then(() => console.log("Connected to MongoDB"))
-//   .catch((err) => console.error("Error connecting to MongoDB", err));
+app.use(notFound);
+app.use(errorHandler);
 
 app.listen(5000, () => {
   console.log("App listening on port 5000");
