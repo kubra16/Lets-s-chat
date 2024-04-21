@@ -5,7 +5,7 @@ const User = require("../models/userModel");
 const accessChat = asyncHandler(async (req, res) => {
   const { userId } = req.body;
   if (!userId) {
-    console.log("USerId params not sent with request");
+    console.log("UserId params not sent with request");
     return res.sendStatus(400);
   }
   var isChat = await Chat.find({
@@ -30,7 +30,7 @@ const accessChat = asyncHandler(async (req, res) => {
       users: [req.user._id, userId],
     };
     try {
-      const createdChat = await Chat.create();
+      const createdChat = await Chat.create(chatData);
       const fullChat = await Chat.findOne({ _id: createdChat._id }).populate(
         "users",
         "-password"
@@ -38,7 +38,7 @@ const accessChat = asyncHandler(async (req, res) => {
       res.status(200).send(fullChat);
     } catch (err) {
       res.status(400);
-      throw new Error(error.message);
+      throw new Error(err.message);
     }
   }
 });

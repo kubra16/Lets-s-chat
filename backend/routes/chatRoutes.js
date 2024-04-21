@@ -11,4 +11,4 @@ router.route("/").post(protect, accessChat);
 // router.route("/groupremove").put(protect, removeFromGroup);
 // router.route("/groupadd").put(protect, addToGroup);
 
-module.exports = chatRoutes;
+module.exports = router;
